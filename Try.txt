@@ -10,10 +10,31 @@ local Window = SynioxLib:CreateWindow({
     MinimizeKey = Enum.KeyCode.LeftControl
 })
 
--- Sekmeler
 local MainTab = Window:AddTab({ Title = "Farm", Icon = "rbxassetid://4483345998" })
+local FarmSection = MainTab:AddSection("Settings")
 
--- Bölümler
-local FarmSection = MainTab:AddSection("Auto Farm Settings")
+_G.AutoFarm = false
+
+FarmSection:AddToggle("FarmToggle", {
+    Title = "Auto Farm", 
+    Default = false, 
+    Callback = function(Value)
+        _G.AutoFarm = Value
+        if Value then
+            task.spawn(function()
+                while _G.AutoFarm do
+                    print("Farm aktif...")
+                    task.wait(1)
+                end
+            end)
+        end
+    end
+})
 
 Window:SelectTab(1)
+
+SynioxLib:Notify({
+    Title = "Syniox Hub",
+    Content = "Yüklendi!",
+    Duration = 5
+})
