@@ -1,7 +1,1 @@
 local SynioxLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SynioxStudios/Syniox-FleuntGui-ByYSF/refs/heads/main/SynioxHub.txt"))()
-
-local Window = redzlib:MakeWindow({
-  Title = "Syniox Hub : Muscle Legends",
-  SubTitle = "ByYusuf",
-})
-local Tab1 = Window:MakeTab({"Try", "cherry"})
