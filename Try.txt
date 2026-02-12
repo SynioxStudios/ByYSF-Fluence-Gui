@@ -9,6 +9,12 @@ local Window = SynioxLib:CreateWindow({
     Theme = "SpeedHubX"
 })
 
+SynioxLib:UpdateCustomTheme({
+    Color3.fromRGB(160, 0, 0),
+    Color3.fromRGB(40, 0, 0),
+    Color3.fromRGB(0, 0, 0)
+})
+
 local AutoFarm = Window:AddTab({ Title = "Farm", Icon = "dumbbell" })
 
 AutoFarm:AddParagraph({
