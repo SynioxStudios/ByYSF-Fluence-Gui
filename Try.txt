@@ -1,10 +1,10 @@
 local SynioxLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SynioxStudios/ByYSF-FLuent-U--V4/refs/heads/main/SynioxUi.txt"))()
 
-SynioxLib:UpdateCustomTheme({
-    Color3.fromRGB(160, 0, 0), -- Üst renk
-    Color3.fromRGB(40, 0, 0),  -- Orta renk
-    Color3.fromRGB(0, 0, 0)    -- Alt renk
-})
+SynioxLib:StartFlowRGB(
+    Color3.fromRGB(120, 0, 0), -- 1. Renk (Kırmızı)
+    Color3.fromRGB(40, 0, 0),  -- 2. Renk (Koyu Kırmızı)
+    Color3.fromRGB(0, 0, 0)    -- 3. Renk (Siyah)
+)
 
 local Window = SynioxLib:CreateWindow({
     Title = "Syniox Hub",
@@ -15,7 +15,7 @@ local Window = SynioxLib:CreateWindow({
     Theme = "SpeedHubX"
 })
 
-local AutoFarm = Window:AddTab({ Title = "Farm", Icon = "dumbbell" })
+local AutoFarm = Window:AddTab({ Title = "Farm", Icon = "weight" })
 
 AutoFarm:AddParagraph({
     Title = "Op Farm",
