@@ -4,12 +4,98 @@ local Window = SynioxLib:CreateWindow({
     Title = "Syniox Hub",
     SubTitle = "v4",
     TabWidth = 160,
-    Size = UDim2.fromOffset(500, 360),
-    Acrylic = true, -- Arka plan bulanıklığı
+    Size = UDim2.fromOffset(430, 320),
+    Acrylic = true,
     Theme = "SpeedHubX"
 })
 
-local MainTab = Window:AddTab({ 
-    Title = "Main", 
-    Icon = "home"
+local AutoFarm = Window:AddTab({ Title = "Farm", Icon = "dumbbell" })
+
+AutoFarm:AddParagraph({
+    Title = "Op Farm",
+    Content = "You can manage auto farm options from here."
+})
+
+_G.repToggle = false
+AutoFarm:AddToggle("MainFarm", {
+    Title = "💪 Auto Farm (Equip Any tool)",
+    Default = false,
+    Callback = function(state)
+        _G.repToggle = state
+        if state then
+            task.spawn(function()
+                while _G.repToggle do
+                    local event = game:GetService("Players").LocalPlayer:FindFirstChild("muscleEvent")
+                    if event then
+                        event:FireServer("rep")
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        end
+    end
+})
+
+local function manageTool(toolName)
+    task.spawn(function()
+        while _G[toolName.."On"] do
+            local player = game.Players.LocalPlayer
+            local character = player.Character
+            if character then
+                local tool = player.Backpack:FindFirstChild(toolName) or character:FindFirstChild(toolName)
+                
+                if tool then
+                    if tool.Parent ~= character then
+                        tool.Parent = character
+                    end
+                    
+                    local event = player:FindFirstChild("muscleEvent")
+                    if event then
+                        event:FireServer("rep")
+                    else
+                        tool:Activate()
+                    end
+                end
+            end
+            task.wait(0.1)
+        end
+    end)
+end
+
+local ToolSection = AutoFarm:AddSection("💪 Tools")
+
+ToolSection:AddToggle("WeightToggle", {
+    Title = "🏋️ Weight",
+    Default = false,
+    Callback = function(bool)
+        _G.WeightOn = bool
+        if bool then manageTool("Weight") end
+    end
+})
+
+ToolSection:AddToggle("PushupsToggle", {
+    Title = "💪 Pushups",
+    Default = false,
+    Callback = function(bool)
+        _G.PushupsOn = bool
+        if bool then manageTool("Pushups") end
+    end
+})
+
+ToolSection:AddToggle("HandstandsToggle", {
+    Title = "🤸 Handstands",
+    Default = false,
+    Callback = function(bool)
+        _G.HandstandsOn = bool
+        if bool then manageTool("Handstands") end
+    end
+})
+
+ToolSection:AddToggle("SitupsToggle", {
+    Title = "🧘 Situps",
+    Default = false,
+    Callback = function(bool)
+        _G.SitupsOn = bool
+        if bool then manageTool("Situps") end
+    end
 })
