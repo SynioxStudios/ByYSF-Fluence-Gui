@@ -7,7 +7,7 @@ SynioxLib:StartFlowRGB(
 )
 
 local Window = SynioxLib:CreateWindow({
-    Title = "Syniox Hub",
+    Title = "Syniox Hub | Muscle Legends",
     SubTitle = "v4",
     TabWidth = 160,
     Size = UDim2.fromOffset(430, 320),
